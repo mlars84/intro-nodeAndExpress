@@ -11,7 +11,7 @@ var songData = [
 
 // middle ware
 app.use( express.static( 'public' ) );
-add.use( bodyParser.urlencoded({ extended: true }) );
+app.use( bodyParser.urlencoded({ extended: true }) );
 
 // get route on your server (the path that is on the end of your website url)
 app.get( '/', function(req, res ) { //when you go to the server at slash
