@@ -1,5 +1,6 @@
 var express = require( 'express' );
 var path = require( 'path' );
+var bodyParser = require( 'body-parser' );
 
 var app = express();
 
@@ -10,6 +11,7 @@ var songData = [
 
 // middle ware
 app.use( express.static( 'public' ) );
+add.use( bodyParser.urlencoded({ extended: true }) );
 
 // get route on your server (the path that is on the end of your website url)
 app.get( '/', function(req, res ) { //when you go to the server at slash
@@ -21,6 +23,13 @@ app.get( '/song', function( req, res ) { // path or location on server to get da
   console.log( 'in get song route' );
   // all the work
   res.send( songData );
+});
+
+app.post( '/song', function( req, res ) {
+  console.log( 'in post route' );
+  console.log( 'req.body ->', req.body );
+  songData.push( req.body );
+  res.sendStatus( 201 ); // equivalent to OK status
 });
 
 // tells our server to listen on port 3001
